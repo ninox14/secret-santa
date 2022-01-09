@@ -29,8 +29,11 @@ export class UsersController {
   create(@Body() createUserDto: CreateUserDto) {
     const wishesArr = JSON.parse(createUserDto.wishes) as string[];
     try {
-      const isValidLength = wishesArr.length === 0 && wishesArr.length > 10;
-      if (!isValidLength || !Array.isArray(wishesArr)) {
+      const isValidLength =
+        wishesArr.length > 0 &&
+        wishesArr.length < 10 &&
+        Array.isArray(wishesArr);
+      if (!isValidLength) {
         throw new BadRequestException(
           'Wishes must be an array of strigns with length from 1 to 10 and each string must be maximum length of 100 ',
         );
