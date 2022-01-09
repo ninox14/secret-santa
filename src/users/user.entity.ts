@@ -21,7 +21,7 @@ export class User {
 
   @ApiProperty()
   @Column()
-  wishes: string[];
+  wishes: string;
 
   @ApiProperty({ type: User })
   @OneToOne(() => User, (user) => user.id)

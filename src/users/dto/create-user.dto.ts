@@ -1,5 +1,5 @@
 import { ApiHideProperty, ApiProperty, OmitType } from '@nestjs/swagger';
-import { IsAlpha, IsAlphanumeric, IsEmpty, IsUUID } from 'class-validator';
+import { IsAlpha, IsEmpty, IsJSON } from 'class-validator';
 import { Game } from 'src/game/game.entity';
 import { User } from '../user.entity';
 
@@ -8,9 +8,9 @@ export class CreateUserDto {
   @ApiProperty()
   name: string;
 
-  @IsAlphanumeric('', { each: true })
+  @IsJSON()
   @ApiProperty()
-  wishes: string[];
+  wishes: string;
 
   @ApiHideProperty()
   @IsEmpty()

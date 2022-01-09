@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  BadRequestException,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -26,7 +27,25 @@ export class UsersController {
   @ApiCreatedResponse({ type: BasicUserType })
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+    const wishesArr = JSON.parse(createUserDto.wishes) as string[];
+    try {
+      const isValidLength = wishesArr.length === 0 && wishesArr.length > 10;
+      if (!isValidLength || !Array.isArray(wishesArr)) {
+        throw new BadRequestException(
+          'Wishes must be an array of strigns with length from 1 to 10 and each string must be maximum length of 100 ',
+        );
+      }
+      wishesArr.forEach((item) => {
+        if (item.length > 100) {
+          throw new BadRequestException(
+            'Wishes must be an array of strigns with length from 1 to 10 and each string must be maximum length of 100 ',
+          );
+        }
+      });
+      return this.usersService.create(createUserDto);
+    } catch (err) {
+      throw err;
+    }
   }
 
   @ApiOkResponse({ type: GetUserResponse, isArray: true })
