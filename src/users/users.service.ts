@@ -15,9 +15,11 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto) {
     const newUser = this.usersRepository.create(createUserDto);
-    await this.gameService.addUser(newUser);
-    // return this.gameService.addUser(newUser);
-    return this.usersRepository.save(newUser);
+    // await this.gameService.addUser(newUser);
+    const savedUserResponse = await this.gameService.addUser(newUser);
+    delete savedUserResponse.game;
+    return savedUserResponse;
+    // return this.usersRepository.save(newUser);
   }
 
   findAll(): Promise<User[]> {

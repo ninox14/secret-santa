@@ -35,16 +35,19 @@ export class GameService {
         'Game has 500 players you must start the game',
       );
     }
-
+    user.game = { ...this.currentGame };
+    const savedUser = await this.userRepo.save(user);
+    savedUser.game.users = null;
     if (!isAnyPlayers) {
-      this.currentGame.users = [user];
+      this.currentGame.users = [savedUser];
     } else {
-      this.currentGame.users.push(user);
+      this.currentGame.users.push({ ...savedUser });
     }
     this.currentGame.playerCount++;
-    const savedResponse = await this.gameRepo.save(this.currentGame);
-    this.currentGame = savedResponse;
-    return savedResponse;
+
+    await this.gameRepo.save(this.currentGame);
+    // this.currentGame = savedResponse;
+    return savedUser;
   }
 
   private createGame() {
@@ -55,7 +58,7 @@ export class GameService {
     return this.gameRepo.save(newGame);
   }
 
-  private getGameState() {
+  getGameState() {
     return this.gameRepo.findOne(
       {
         isStarted: false,
@@ -67,7 +70,7 @@ export class GameService {
   async startGame() {
     this.currentGame.isStarted = true;
     const gameState = await this.getGameState();
-
+    console.log(gameState.playerCount < 3);
     if (this.currentGame.playerCount < 3) {
       throw new BadRequestException('Game has less than 3 players');
     }
@@ -77,7 +80,8 @@ export class GameService {
       gameState.users = usersArr;
       await this.gameRepo.save(gameState);
       this.currentGame = await this.createGame();
-      return gameState;
+      // return gameState;
+      return 200;
     } catch (err) {
       throw err;
     }

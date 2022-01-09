@@ -12,6 +12,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import {
+  ApiBadRequestResponse,
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
@@ -25,6 +26,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @ApiCreatedResponse({ type: BasicUserType })
+  @ApiBadRequestResponse()
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     const wishesArr = JSON.parse(createUserDto.wishes) as string[];
