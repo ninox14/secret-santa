@@ -22,14 +22,30 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Yalantis guy attention!
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### Deploy: https://secret-santa-ninox.herokuapp.com/ 
+
+To start app localy you need to:
+
+- install modules
+- build app
+- run app (preferably in dev mode)
+- GOTO: http://localhost:5000/
+
+PS: there is no tests for this app 
 
 ## Installation
 
 ```bash
 $ npm install
+```
+
+## Build the app
+
+```bash
+# BUILD BEFORE RUNNING!!!!
+$ npm run build
 ```
 
 ## Running the app
