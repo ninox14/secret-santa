@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { User } from 'src/users/user.entity';
+import { BasicUserType, User } from 'src/users/user.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
@@ -19,6 +19,6 @@ export class Game {
   @OneToMany(() => User, (user) => user.game, {
     // cascade: true,
   })
-  @ApiProperty({ type: () => [User] })
+  @ApiProperty({ type: () => [BasicUserType] })
   users: User[];
 }

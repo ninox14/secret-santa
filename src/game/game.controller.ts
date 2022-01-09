@@ -1,10 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import {
-  ApiBadRequestResponse,
-  ApiCreatedResponse,
-  ApiOkResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Game } from './game.entity';
 import { GameService } from './game.service';
 
@@ -13,7 +8,7 @@ import { GameService } from './game.service';
 export class GameController {
   constructor(private readonly gameService: GameService) {}
 
-  @ApiCreatedResponse({ type: () => Game })
+  @ApiOkResponse({ type: () => Game })
   @Get()
   async getGame() {
     return await this.gameService.getGame();
