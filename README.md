@@ -24,7 +24,7 @@
 
 ## Yalantis guy attention!
 
-### Deploy: https://secret-santa-ninox.herokuapp.com/ 
+### Deploy: https://secret-santa-ninox.herokuapp.com/
 
 To start app localy you need to:
 
@@ -32,8 +32,9 @@ To start app localy you need to:
 - build app
 - run app (preferably in dev mode)
 - GOTO: http://localhost:5000/
+# **/game/start** is */shuffle* endpoint
 
-PS: there is no tests for this app 
+PS: there is no tests for this app
 
 ## Installation
 
